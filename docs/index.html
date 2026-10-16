@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>原神角色生日与周年庆日历</title>
+<style>
+  body{font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f7f4ef;color:#252b38;max-width:700px;margin:0 auto;padding:48px 22px}
+  h1{font-size:2rem;margin:0 0 12px}p{margin:0 0 20px}.card{background:white;border:1px solid #e7e1d7;border-radius:18px;padding:28px;box-shadow:0 8px 26px #241c100d}
+  a.button{display:inline-block;background:#254b78;color:white;border-radius:10px;padding:11px 17px;text-decoration:none;margin:0 10px 12px 0}
+  a.button.alt{background:#eaf0f7;color:#254b78}code{overflow-wrap:anywhere}small{color:#606975}
+</style>
+<main class="card">
+  <h1>原神生日与周年庆</h1>
+  <p>角色生日为全天日程；前一天晚上 20:00 提醒。每周五晚上 20:00 汇总下周一至周日的生日。9 月 28 日为原神周年庆。</p>
+  <p><a id="subscribe" class="button" href="genshin-birthdays.ics">订阅 Apple 日历（自动更新）</a><a class="button alt" href="genshin-birthdays.ics" download>下载 .ics（一次性导入）</a></p>
+  <p><small>订阅日历随本站更新。一次性导入的副本不会自动添加后续新角色。时区：北京时间（Asia/Shanghai）。如果订阅按钮没有打开日历，请在 Apple 日历中选择“添加订阅日历”，粘贴下方地址。</small></p>
+  <p><code id="url"></code></p>
+</main>
+<script>
+  const ics = new URL('genshin-birthdays.ics', location.href);
+  const webcal = ics.href.replace(/^https?:/, 'webcal:');
+  document.getElementById('subscribe').href = webcal;
+  document.getElementById('url').textContent = ics.href;
+</script>
+</html>

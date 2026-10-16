@@ -1,0 +1,51 @@
+name: 更新原神生日订阅日历
+
+on:
+  schedule:
+    - cron: '15 0 * * *' # Beijing 08:15, daily
+  workflow_dispatch:
+  push:
+    paths:
+      - 'build_calendar.py'
+      - 'birthdays.json'
+      - 'names_zh.json'
+      - 'docs/index.html'
+      - '.github/workflows/calendar.yml'
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Scan birthdays and rebuild calendar
+        run: python build_calendar.py --refresh
+      - name: Save changes to repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add birthdays.json scan-report.json docs/genshin-birthdays.ics
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Genshin birthdays calendar"
+            git push
+          fi
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+      - id: deploy
+        uses: actions/deploy-pages@v4
