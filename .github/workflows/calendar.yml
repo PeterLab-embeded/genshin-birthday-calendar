@@ -34,6 +34,8 @@ jobs:
           python-version: '3.12'
       - name: Scan birthdays and rebuild calendar
         run: python build_calendar.py --refresh
+      - name: Verify calendar format and reminder dates
+        run: python verify_calendar.py
       - name: Save changes to repository
         run: |
           git config user.name "github-actions[bot]"
