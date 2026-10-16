@@ -5,15 +5,12 @@
 ## 使用
 
 - **立即导入：**在 Apple 设备上打开 `.ics` 文件，选择导入到日历。这份副本不会自动更新。
-- **自动更新：**将此目录发布到 GitHub Pages 后，访问 Pages 首页，点“订阅 Apple 日历”。也可在 Apple 日历的“日历 → 添加日历 → 添加订阅日历”中粘贴 `https://<用户名>.github.io/<仓库名>/genshin-birthdays.ics`。订阅更新的显示时间取决于 Apple 日历的刷新。
+- **自动更新：**打开[日历订阅页](https://peterlab-embeded.github.io/genshin-birthday-calendar/)，点“订阅 Apple 日历”。也可在 Apple 日历的“日历 → 添加日历 → 添加订阅日历”中粘贴 `https://peterlab-embeded.github.io/genshin-birthday-calendar/genshin-birthdays.ics`。订阅更新的显示时间取决于 Apple 日历的刷新。
 - 请在设备的“设置 → 通知 → 日历”开启通知。订阅日历是否显示事件内的提醒也取决于 Apple 系统设置，首次订阅后请用一个近期提醒验证。
 
-## GitHub Pages 发布
+## 自动更新
 
-1. 创建公开仓库，将**此目录的内容**放在仓库根目录。
-2. 仓库 `Settings → Pages → Build and deployment → Source` 选择 **GitHub Actions**。
-3. 在 `Actions` 手动运行“更新原神生日订阅日历”一次。发布后访问 `https://<用户名>.github.io/<仓库名>/`。
-4. 工作流每天北京时间约 08:15 扫描公开生日索引，重建 `.ics` 并发布。GitHub 的计划任务可能延迟。新角色先以英文名称进入日历；可在 `names_zh.json` 补中文名。
+公开仓库的 [GitHub Actions 工作流](https://github.com/PeterLab-embeded/genshin-birthday-calendar/actions) 每天北京时间约 08:15 扫描公开生日索引，重建 `.ics` 并发布到 GitHub Pages。GitHub 的计划任务可能延迟。新角色先以英文名称进入日历；可在 `names_zh.json` 补中文名。
 
 日历当前采用公开的 [Fan Support 生日索引](https://fansupport.joelin.cc/en/group/genshin-impact/) 并与 [Genshin Impact Wiki 生日表](https://genshin-impact.fandom.com/wiki/Birthday) 交叉核对。来源会变动，`scan-report.json` 记录每次扫描新增与删除/改期项目；抓取异常会让工作流失败，保留上一次已发布日历。原神于 [2020 年 9 月 28 日全球上线](https://genshin.hoyoverse.com/en/news/detail/5284)。
 
